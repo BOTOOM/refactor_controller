@@ -54,6 +54,7 @@ def main():
     reemplazos_post = {
         "@Title Post": {
             "@Failure 403 body is empty": "// @Failure 400 the request contains incorrect syntax\n",
+            "if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {": "if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {\n v.FechaCreacion = time_bogota.TiempoBogotaFormato()\n v.FechaModificacion = time_bogota.TiempoBogotaFormato()\n",
             "c.Data[\"json\"] = err.Error()": "logs.Error(err)\n c.Data[\"json\"] = map[string]interface{}{\"Code\": \"400\", \"Body\": err.Error(), \"Type\": \"error\"}\nc.Data[\"system\"] = err\n c.Ctx.Output.SetStatus(400)\n"
         },
     }
@@ -76,6 +77,7 @@ def main():
     reemplazos_put = {
         "@Title Put": {
             "@Failure 403 :id is not int": "// @Failure 400 the request contains incorrect syntax\n",
+            "if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {": "if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {\n v.FechaCreacion = time_bogota.TiempoCorreccionFormato(v.FechaCreacion)\n v.FechaModificacion = time_bogota.TiempoBogotaFormato()\n",
             "c.Data[\"json\"] = err.Error()": "logs.Error(err)\n c.Data[\"json\"] = map[string]interface{}{\"Code\": \"400\", \"Body\": err.Error(), \"Type\": \"error\"}\nc.Data[\"system\"] = err\n c.Ctx.Output.SetStatus(400)\n",
             "c.Data[\"json\"] = \"OK\"": "c.Data[\"json\"] = v\n",
         },
